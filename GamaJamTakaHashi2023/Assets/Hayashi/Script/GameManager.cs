@@ -21,18 +21,31 @@ public class GameManager : MonoBehaviour
     private GameObject m_Sponer;
     [SerializeField]
     private GameObject m_Player;
+    [SerializeField]
+    private float m_Time;
+    [SerializeField]
+    private bool isReStart;
     public bool isEnd;
     private bool isStart;
     private void Start()
     {
         isEnd = false;
         isStart = false;
+        isReStart = false;
     }
     private void Update()
     {
         if(isEnd)
         {
             m_CurrentState = State.EndGame;
+        }
+        if(isReStart)
+        {
+            m_Time += Time.deltaTime;
+            if (m_Time > 1.2)
+            {
+                SceneManager.LoadScene("GameScene");
+            }
         }
         switch (m_CurrentState)
         {
@@ -66,12 +79,8 @@ public class GameManager : MonoBehaviour
             case State.EndGame:
                 if (Input.GetButtonDown("Fire1") || Input.anyKeyDown)
                 {
-                    Manager.BGMManager.Instance.FadeBGMChange("");
-                    Manager.FadeManager.Instance.SetFadeColor(new Color(0.0f, 0.0f, 0.0f, 0.0f));
-                    Manager.FadeManager.Instance.SetFadeFlag(true, () =>
-                    {
-                        SceneManager.LoadScene("GameScene");
-                    });
+                    m_TitleScreenAnimator.SetBool("isReStart", true);
+                   isReStart = true;
                 }
                 break;
         }

@@ -39,7 +39,7 @@ public class Player : MonoBehaviour
     }
     private void Die()
     {
-        Manager.SEManager.Instance.SEPlay("EnemyDestroy");
+        Manager.SEManager.Instance.SEPlay("se_mero_gameover2_01");
         Destroy(gameObject);
     }
     public void TakePlayerDamage(int damage)

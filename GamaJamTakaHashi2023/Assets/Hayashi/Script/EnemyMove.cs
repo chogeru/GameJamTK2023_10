@@ -25,8 +25,6 @@ public class EnemyMove : MonoBehaviour
     private GameObject m_ScoreText;
     private GameObject m_Manager;
     [SerializeField]
-    private ParticleSystem m_HitEffect;
-    [SerializeField]
     private Transform m_TargetPoint;
     [SerializeField]
     private Rigidbody rb;
@@ -66,7 +64,6 @@ public class EnemyMove : MonoBehaviour
     }
     private void Die()
     {
-        Instantiate(m_HitEffect, transform.position, Quaternion.identity);
         switch (m_CurrentType)
         {
             case Type.Oni:
@@ -83,28 +80,28 @@ public class EnemyMove : MonoBehaviour
         Manager.SEManager.Instance.SEPlay("EnemyDestroy");
         Destroy(gameObject);
     }
-
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            Manager.ParticleManager.Instance.ParticlePlay("HitEfffect", transform.position, Quaternion.identity, 1f);
             switch (m_CurrentType)
             {
                 case Type.Oni:
-                    Instantiate(m_HitEffect, transform.position, Quaternion.identity);
                     Player player = collision.gameObject.GetComponent<Player>();
                     if (player != null)
                     {
+                        Manager.SEManager.Instance.SEPlay("CollisionHouse");
                         player.TakePlayerDamage(m_Attack);
                     }
                     break;
                 case Type.Kami:
-                    Instantiate(m_HitEffect, transform.position, Quaternion.identity);
                     score.m_Score += m_ScorePoint;
+                    Manager.SEManager.Instance.SEPlay("CollisionKami");
                     break;
                 case Type.fakeKami:
-                    Instantiate(m_HitEffect, transform.position, Quaternion.identity);
                     score.m_Score -= m_ScorePoint;
+                    Manager.SEManager.Instance.SEPlay("CollisionDammyKami");
                     break;
             }
 
