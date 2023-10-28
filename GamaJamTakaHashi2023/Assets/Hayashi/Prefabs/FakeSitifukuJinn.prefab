@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6946591460198941764}
   - component: {fileID: 7558180625246035384}
   m_Layer: 0
-  m_Name: AkaOni
+  m_Name: FakeSitifukuJinn
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c4c82ea6ab903fb4fbd3e3779c8f4a1c, type: 2}
+  - {fileID: 2100000, guid: 9cbe3e7e88423dc4aa1e70572efe734f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -146,12 +146,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56ac25ce1b2f68f4fbfcd2203c4876f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MySpeed: 2
+  m_MySpeed: 4
   m_MyHP: 5
   m_Attack: 5
-  m_ScorePoint: 0
+  m_ScorePoint: 50
+  m_ScoreDownPoint: 50
   m_HitEffect: {fileID: 2574131927240948249, guid: 4d8509297a419374ca9c9aca85f79cad, type: 3}
   m_TargetPoint: {fileID: 0}
   rb: {fileID: 6946591460198941764}
   enemyState: {fileID: 11400000, guid: b4dcb0b12f4c4dd4eab0d488afe1c7ef, type: 2}
-  m_CurrentType: 0
+  m_CurrentType: 2

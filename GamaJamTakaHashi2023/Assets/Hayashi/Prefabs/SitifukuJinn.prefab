@@ -150,6 +150,7 @@ MonoBehaviour:
   m_MyHP: 5
   m_Attack: 5
   m_ScorePoint: 100
+  m_ScoreDownPoint: 50
   m_HitEffect: {fileID: 2574131927240948249, guid: 4d8509297a419374ca9c9aca85f79cad, type: 3}
   m_TargetPoint: {fileID: 0}
   rb: {fileID: 6946591460198941764}
