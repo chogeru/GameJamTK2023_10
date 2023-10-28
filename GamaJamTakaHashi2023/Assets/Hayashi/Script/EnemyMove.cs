@@ -1,16 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyMove : MonoBehaviour
 {
+    enum Type
+    {
+        Oni,
+        Kami
+    }
     [SerializeField]
     private float m_MySpeed;
     [SerializeField]
     private int m_MyHP;
     [SerializeField]
     private int m_Attack;
-
+    [SerializeField]
+    private int m_ScorePoint;
+    private GameObject m_ScoreText;
     [SerializeField]
     private ParticleSystem m_HitEffect;
     [SerializeField]
@@ -19,9 +27,14 @@ public class EnemyMove : MonoBehaviour
     private Rigidbody rb;
     [SerializeField]
     EnemyState enemyState;
+    Score score;
+    [SerializeField]
+    private Type m_CurrentType;
     void Start()
     {
-        m_TargetPoint = GameObject.FindGameObjectWithTag("Player").transform;
+       m_TargetPoint = GameObject.FindGameObjectWithTag("Player").transform;
+       m_ScoreText = GameObject.Find("ScoreText");
+       score=m_ScoreText.GetComponent<Score>();
     }
 
     void Update()
@@ -43,16 +56,28 @@ public class EnemyMove : MonoBehaviour
         Instantiate(m_HitEffect, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
+
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.CompareTag("Player"))
         {
-            Instantiate(m_HitEffect, transform.position, Quaternion.identity);
-            Player player = collision.gameObject.GetComponent<Player>();
-            if(player != null)
+            switch (m_CurrentType)
             {
-                player.TakePlayerDamage(enemyState.Attack);
+                case Type.Oni:
+                    Instantiate(m_HitEffect, transform.position, Quaternion.identity);
+                    Player player = collision.gameObject.GetComponent<Player>();
+                    if (player != null)
+                    {
+                        player.TakePlayerDamage(m_Attack);
+                    }
+                    break;
+                case Type.Kami:
+                    Instantiate(m_HitEffect, transform.position, Quaternion.identity);
+                    score.m_Score += m_ScorePoint;
+                    break;
             }
+
+         
             Destroy(gameObject);
         }
     }

@@ -15,6 +15,7 @@ public class Bulet : MonoBehaviour
             {
                 enemyMove.TakeDamage(m_Damage);
             }
+            Destroy(gameObject);
         }
     }
 }
