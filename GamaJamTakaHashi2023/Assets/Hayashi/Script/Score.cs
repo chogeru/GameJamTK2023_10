@@ -12,6 +12,6 @@ public class Score : MonoBehaviour
     public int m_Score=0;
     void Update()
     {
-        m_ScoreText.text = string.Format("Score:{0}", m_Score);
+        m_ScoreText.text = string.Format("‰^‹C:{0}", m_Score);
     }
 }

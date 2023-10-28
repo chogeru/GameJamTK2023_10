@@ -21,7 +21,7 @@ public class EnemyMove : MonoBehaviour
     private int m_ScorePoint;
     [SerializeField]
     private int m_ScoreDownPoint;
-    
+
     private GameObject m_ScoreText;
     private GameObject m_Manager;
     [SerializeField]
@@ -39,21 +39,25 @@ public class EnemyMove : MonoBehaviour
     private Type m_CurrentType;
     void Start()
     {
+
         m_TargetPoint = GameObject.FindGameObjectWithTag("Player").transform;
         m_Manager = GameObject.Find("SpownManager");
         m_ScoreText = GameObject.Find("ScoreText");
-        spownManager=m_Manager.GetComponent<SpownManager>();
+        spownManager = m_Manager.GetComponent<SpownManager>();
         score = m_ScoreText.GetComponent<Score>();
     }
 
     void Update()
     {
-        Vector3 direction = (m_TargetPoint.position - transform.position).normalized;
-        Vector3 targetVelocity = direction * m_MySpeed;
-        rb.velocity = Vector3.ClampMagnitude(targetVelocity, m_MySpeed);
-        if (m_MyHP <= 0)
+        if (m_TargetPoint != null)
         {
-            Die();
+            Vector3 direction = (m_TargetPoint.position - transform.position).normalized;
+            Vector3 targetVelocity = direction * m_MySpeed;
+            rb.velocity = Vector3.ClampMagnitude(targetVelocity, m_MySpeed);
+            if (m_MyHP <= 0)
+            {
+                Die();
+            }
         }
     }
     public void TakeDamage(int damage)

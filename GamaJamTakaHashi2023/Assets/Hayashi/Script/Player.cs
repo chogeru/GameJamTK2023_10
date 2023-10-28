@@ -13,6 +13,10 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject m_SceneManager;
     [SerializeField]
+    private GameObject m_Spawner;
+    [SerializeField]
+    private GameObject m_GameOverText;
+    [SerializeField]
     private Slider m_HpSlider;
     EnemyMove enemyMove;
     GameManager sceneManager;
@@ -21,12 +25,15 @@ public class Player : MonoBehaviour
         m_Hp = m_MaxHp;
         m_HpSlider.value = 1;
         sceneManager=m_SceneManager.GetComponent<GameManager>();
+        m_GameOverText.SetActive(false);
     }
     private void Update()
     {
         if(m_Hp<=0)
         {
             sceneManager.isEnd = true;
+            m_Spawner.SetActive(false);
+            m_GameOverText.SetActive(true);
             Die();
         }
     }

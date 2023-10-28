@@ -20,9 +20,11 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject m_Player;
     public bool isEnd;
+    private bool isStart;
     private void Start()
     {
         isEnd = false;
+        isStart = false;
     }
     private void Update()
     {
@@ -35,18 +37,36 @@ public class GameManager : MonoBehaviour
             case State.GameStart:
                 m_Player.SetActive(false);
                 m_Sponer.SetActive(false);
-                if (Input.GetButtonDown("Fire1") || Input.anyKeyDown)
+                if(!isStart)
                 {
-                    m_CurrentState = State.NowGame;
-
+                    if (Input.GetButtonDown("Fire1") || Input.anyKeyDown)
+                    {
+                        Manager.BGMManager.Instance.FadeBGMChange("OniBaraiBGM02");
+                        Manager.FadeManager.Instance.SetFadeColor(new Color(0.0f, 0.0f, 0.0f, 1.0f));
+                        Manager.FadeManager.Instance.SetFadeFlag(false, () =>
+                        {
+                            m_CurrentState = State.NowGame;
+                        });
+                        isStart = true;
+                    }
+                    
                 }
+
                 break;
             case State.NowGame:
                 m_Sponer.SetActive(true);
                 m_Player.SetActive(true);
                 break;
             case State.EndGame:
-                SceneManager.LoadScene("GameScene");
+                if (Input.GetButtonDown("Fire1") || Input.anyKeyDown)
+                {
+                    Manager.BGMManager.Instance.FadeBGMChange("");
+                    Manager.FadeManager.Instance.SetFadeColor(new Color(0.0f, 0.0f, 0.0f, 0.0f));
+                    Manager.FadeManager.Instance.SetFadeFlag(true, () =>
+                    {
+                        SceneManager.LoadScene("GameScene");
+                    });
+                }
                 break;
         }
 
