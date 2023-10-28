@@ -10,6 +10,10 @@ public class Player : MonoBehaviour
     private int m_Hp;
     [SerializeField]
     private int m_MaxHp;
+    private float m_AnimeEndTime;
+    private bool isEndAnime = false;
+    [SerializeField]
+    private Animator m_MyAnimator;
     [SerializeField]
     private GameObject m_SceneManager;
     [SerializeField]
@@ -36,6 +40,15 @@ public class Player : MonoBehaviour
             m_GameOverText.SetActive(true);
             Die();
         }
+        if(isEndAnime)
+        {
+            m_AnimeEndTime += Time.deltaTime;
+            if(m_AnimeEndTime>0.2)
+            {
+                m_MyAnimator.SetBool("isShake", false);
+                m_AnimeEndTime = 0;
+            }
+        }
     }
     private void Die()
     {
@@ -44,6 +57,8 @@ public class Player : MonoBehaviour
     }
     public void TakePlayerDamage(int damage)
     {
+        m_MyAnimator.SetBool("isShake", true);
+        isEndAnime=true;
         m_Hp -= damage;
         m_HpSlider.value = (float)m_Hp / (float)m_MaxHp;
     }
