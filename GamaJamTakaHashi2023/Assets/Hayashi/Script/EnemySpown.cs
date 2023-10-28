@@ -5,20 +5,24 @@ using UnityEngine;
 public class EnemySpown : MonoBehaviour
 {
 
-    private float m_BounusTime=10;
-    [SerializeField]
+ 
+    [SerializeField,Header("最大スポーンタイム")]
     private float m_MaxSpownInterval;
-    [SerializeField]
+    [SerializeField,Header("最小スポーンタイム")]
     private float m_MinSpownInterval;
+    [SerializeField,Header("最大スポーンタイムの元の時間")]
+    private float m_OriginalInterval;
     [SerializeField]
     private float m_BounusTimeInterval;
+    [SerializeField]
+    private float m_OriginalBounusTime;
     [SerializeField]
     private float m_SpownTime;
     [SerializeField]
     private GameObject[] m_EnemyPrefabs;
     [SerializeField]
     private Transform m_SpownPoint;
-
+    [SerializeField]
     SpownManager spownManager;
     private void Update()
     {
@@ -30,26 +34,29 @@ public class EnemySpown : MonoBehaviour
             m_SpownTime = Random.Range(m_MinSpownInterval,m_MaxSpownInterval);
 
         }
-        /*
+        
         if(spownManager.isBounus)
         {
             BounusTime();
-            m_BounusTime -= Time.deltaTime;
-            if(m_BounusTime <= 0)
+         
+            if(spownManager.m_BounusTime <= 0)
             {
-                EndBounusTime();
                 spownManager.m_BonusCount = 0;
+                spownManager.m_BounusTime = m_OriginalBounusTime;
                 spownManager.isBounus = false;
-                m_BounusTime = 10;
             }
-        }*/
+        }
+        if(spownManager.isBounus==false)
+        {
+            EndBounusTime();
+        }
     }
     private void BounusTime()
     {
-        m_MaxSpownInterval -= m_BounusTimeInterval;
+        m_MaxSpownInterval = m_BounusTimeInterval;
     }
     private void EndBounusTime()
     {
-        m_MaxSpownInterval += m_BounusTimeInterval;
+        m_MaxSpownInterval = m_OriginalInterval;
     }
 }
