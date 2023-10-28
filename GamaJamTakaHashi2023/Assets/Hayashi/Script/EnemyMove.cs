@@ -80,7 +80,7 @@ public class EnemyMove : MonoBehaviour
                 break;
         }
 
-
+        Manager.SEManager.Instance.SEPlay("EnemyDestroy");
         Destroy(gameObject);
     }
 

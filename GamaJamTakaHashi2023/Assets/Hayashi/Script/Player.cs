@@ -39,6 +39,7 @@ public class Player : MonoBehaviour
     }
     private void Die()
     {
+        Manager.SEManager.Instance.SEPlay("EnemyDestroy");
         Destroy(gameObject);
     }
     public void TakePlayerDamage(int damage)

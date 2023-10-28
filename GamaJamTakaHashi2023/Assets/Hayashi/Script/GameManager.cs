@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject m_PlayerShot;
     [SerializeField]
+    private Animator m_TitleScreenAnimator;
+    [SerializeField]
     private GameObject m_Sponer;
     [SerializeField]
     private GameObject m_Player;
@@ -41,12 +43,16 @@ public class GameManager : MonoBehaviour
                 {
                     if (Input.GetButtonDown("Fire1") || Input.anyKeyDown)
                     {
+                        m_TitleScreenAnimator.SetBool("isStert", true);
+                        Manager.SEManager.Instance.SEPlay("GameStart");
+                        /*
                         Manager.BGMManager.Instance.FadeBGMChange("OniBaraiBGM02");
                         Manager.FadeManager.Instance.SetFadeColor(new Color(0.0f, 0.0f, 0.0f, 1.0f));
                         Manager.FadeManager.Instance.SetFadeFlag(false, () =>
                         {
                             m_CurrentState = State.NowGame;
-                        });
+                        });*/
+                        m_CurrentState = State.NowGame;
                         isStart = true;
                     }
                     
