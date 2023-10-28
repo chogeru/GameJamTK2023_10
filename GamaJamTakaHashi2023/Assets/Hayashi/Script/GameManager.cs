@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,10 +10,19 @@ public class GameManager : MonoBehaviour
     {
         GameStart,
         NowGame,
-        EndGame
+        EndGame,
+        GameClear
     }
     [SerializeField]
     public State m_CurrentState;
+    [SerializeField, Header("現在の時間")]
+    private float m_CurrentTime;
+    [SerializeField, Header("カウントダウンの時間")]
+    private float m_CountDownTime;
+    [SerializeField]
+    private TextMeshProUGUI M_CountDownText;
+    [SerializeField]
+    private string m_Text;
     [SerializeField]
     private GameObject m_PlayerShot;
     [SerializeField]
@@ -21,6 +31,8 @@ public class GameManager : MonoBehaviour
     private GameObject m_Sponer;
     [SerializeField]
     private GameObject m_Player;
+    [SerializeField]
+    private GameObject m_ClearScreen;
     [SerializeField]
     private float m_Time;
     [SerializeField]
@@ -32,6 +44,7 @@ public class GameManager : MonoBehaviour
         isEnd = false;
         isStart = false;
         isReStart = false;
+        m_CurrentTime = m_CountDownTime;
     }
     private void Update()
     {
@@ -75,6 +88,12 @@ public class GameManager : MonoBehaviour
             case State.NowGame:
                 m_Sponer.SetActive(true);
                 m_Player.SetActive(true);
+                m_CurrentTime -= Time.deltaTime;
+                if (m_CurrentTime < 0)
+                {
+                m_CurrentState= State.GameClear;
+                }
+                M_CountDownText.text = m_Text + m_CurrentTime.ToString("F2");//F2で小数点2桁まで表示
                 break;
             case State.EndGame:
                 if (Input.GetButtonDown("Fire1") || Input.anyKeyDown)
@@ -83,7 +102,10 @@ public class GameManager : MonoBehaviour
                    isReStart = true;
                 }
                 break;
+            case State.GameClear:
+                m_ClearScreen.SetActive(true);
+                break;
         }
-
+     
     }
 }
