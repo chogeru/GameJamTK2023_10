@@ -4433,7 +4433,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8494776722004159072, guid: 619f9192d22f2614bbf2a6fd774d63ae, type: 3}
       propertyPath: m_SpownTime
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8494776722004159072, guid: 619f9192d22f2614bbf2a6fd774d63ae, type: 3}
       propertyPath: spownManager
