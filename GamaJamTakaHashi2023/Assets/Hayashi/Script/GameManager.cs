@@ -63,21 +63,18 @@ public class GameManager : MonoBehaviour
         switch (m_CurrentState)
         {
             case State.GameStart:
+                Manager.BGMManager.Instance.BGMChange("OniBaraiBGM01");
+
                 m_Player.SetActive(false);
                 m_Sponer.SetActive(false);
                 if(!isStart)
                 {
+           
                     if (Input.GetButtonDown("Fire1") || Input.anyKeyDown)
                     {
                         m_TitleScreenAnimator.SetBool("isStert", true);
                         Manager.SEManager.Instance.SEPlay("GameStart");
-                        /*
-                        Manager.BGMManager.Instance.FadeBGMChange("OniBaraiBGM02");
-                        Manager.FadeManager.Instance.SetFadeColor(new Color(0.0f, 0.0f, 0.0f, 1.0f));
-                        Manager.FadeManager.Instance.SetFadeFlag(false, () =>
-                        {
-                            m_CurrentState = State.NowGame;
-                        });*/
+                        Manager.BGMManager.Instance.BGMChange("OniBaraiBGM02");
                         m_CurrentState = State.NowGame;
                         isStart = true;
                     }
@@ -96,14 +93,25 @@ public class GameManager : MonoBehaviour
                 M_CountDownText.text = m_Text + m_CurrentTime.ToString("F2");//F2Ç≈è¨êîì_2åÖÇ‹Ç≈ï\é¶
                 break;
             case State.EndGame:
+                Manager.BGMManager.Instance.BGMChange("OniBaraiBGM03UnHappy");
                 if (Input.GetButtonDown("Fire1") || Input.anyKeyDown)
                 {
                     m_TitleScreenAnimator.SetBool("isReStart", true);
                    isReStart = true;
+                 
                 }
                 break;
             case State.GameClear:
+                Manager.BGMManager.Instance.BGMChange("OniBaraiBGM03Happy");
                 m_ClearScreen.SetActive(true);
+                m_Player.SetActive(false);
+                m_Sponer.SetActive(false);
+                if (Input.GetButtonDown("Fire1") || Input.anyKeyDown)
+                {
+                    m_TitleScreenAnimator.SetBool("isReStart", true);
+                    isReStart = true;
+
+                }
                 break;
         }
      
