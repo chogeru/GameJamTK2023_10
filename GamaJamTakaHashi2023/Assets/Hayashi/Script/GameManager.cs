@@ -90,9 +90,10 @@ public class GameManager : MonoBehaviour
                 m_Sponer.SetActive(true);
                 m_Player.SetActive(true);
                 m_CurrentTime -= Time.deltaTime;
-                if (m_CurrentTime < 0)
+                if (m_CurrentTime <= 0)
                 {
-                m_CurrentState= State.GameClear;
+                    m_CurrentTime = 0.0f;
+                    m_CurrentState = State.GameClear;
                 }
                 M_CountDownText.text = m_Text + m_CurrentTime.ToString("F2");//F2‚Å¬”“_2Œ…‚Ü‚Å•\Ž¦
                 break;
