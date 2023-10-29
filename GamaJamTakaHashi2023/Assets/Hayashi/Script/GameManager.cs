@@ -99,6 +99,7 @@ public class GameManager : MonoBehaviour
                 break;
             case State.EndGame:
                 Manager.BGMManager.Instance.BGMChange("OniBaraiBGM03UnHappy");
+       
                 if (overWaitTime > 0.0f) {
                     overWaitTime -= Time.deltaTime;
                     break;
