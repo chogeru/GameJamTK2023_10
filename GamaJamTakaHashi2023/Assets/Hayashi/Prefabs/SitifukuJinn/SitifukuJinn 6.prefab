@@ -107,7 +107,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!54 &6946591460198941764
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -152,7 +152,6 @@ MonoBehaviour:
   m_Attack: 5
   m_ScorePoint: 100
   m_ScoreDownPoint: 50
-  m_HitEffect: {fileID: 2574131927240948249, guid: 4d8509297a419374ca9c9aca85f79cad, type: 3}
   m_TargetPoint: {fileID: 0}
   rb: {fileID: 6946591460198941764}
   enemyState: {fileID: 11400000, guid: b4dcb0b12f4c4dd4eab0d488afe1c7ef, type: 2}
