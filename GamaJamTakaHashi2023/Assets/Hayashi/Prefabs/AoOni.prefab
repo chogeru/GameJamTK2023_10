@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_MySpeed: 3
-  m_MyHP: 15
+  m_MyHP: 20
   m_Attack: 1
   m_ScorePoint: 0
   m_ScoreDownPoint: 0
