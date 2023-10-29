@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyMove : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class EnemyMove : MonoBehaviour
     private float m_MySpeed;
     [SerializeField]
     private int m_MyHP;
+    [SerializeField]
+    private int m_MaxMyHp;
     [SerializeField]
     private int m_Attack;
     [SerializeField]
@@ -34,10 +37,12 @@ public class EnemyMove : MonoBehaviour
     EnemySpown enemySpown;
     SpownManager spownManager;
     [SerializeField]
+    private Slider m_EnemyHpSlider;
+    [SerializeField]
     private Type m_CurrentType;
     void Start()
     {
-
+        m_EnemyHpSlider.value = 1;
         m_TargetPoint = GameObject.FindGameObjectWithTag("Player").transform;
         m_Manager = GameObject.Find("SpownManager");
         m_ScoreText = GameObject.Find("ScoreText");
@@ -61,6 +66,7 @@ public class EnemyMove : MonoBehaviour
     public void TakeDamage(int damage)
     {
         m_MyHP -= damage;
+        m_EnemyHpSlider.value = (float)m_MyHP / (float)m_MaxMyHp;
     }
     private void Die()
     {
