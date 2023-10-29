@@ -85,9 +85,10 @@ public class EnemyMove : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             Manager.ParticleManager.Instance.ParticlePlay("HitEfffect", transform.position, Quaternion.identity, 1f);
-            switch (m_CurrentType)
-            {
+            switch (m_CurrentType) {
                 case Type.Oni:
+                    Manager.ParticleManager.Instance.ParticlePlay("MKTEffect/紫の剣戟", transform.position, Quaternion.identity, 1f);
+
                     Player player = collision.gameObject.GetComponent<Player>();
                     if (player != null)
                     {
@@ -100,6 +101,8 @@ public class EnemyMove : MonoBehaviour
                     Manager.SEManager.Instance.SEPlay("CollisionKami");
                     break;
                 case Type.fakeKami:
+                    Manager.ParticleManager.Instance.ParticlePlay("MKTEffect/アビゲイルの使ってた単体攻撃エフェクト", transform.position, Quaternion.identity, 1f);
+                    
                     score.m_Score -= m_ScorePoint;
                     Manager.SEManager.Instance.SEPlay("CollisionDammyKami");
                     break;
