@@ -28,14 +28,14 @@ namespace Manager {
             DontDestroyOnLoad(gameObject);
             Load();
         }
-        void Update() {
+        /*void Update() {
             //スクリーンの設定は、毎フレーム行う
             if (getFullScreenFlag == 0) {
                 Screen.SetResolution(getAspectXNum, getAspectYNum, false);
             } else {
                 Screen.SetResolution(getAspectXNum, getAspectYNum, true);
             }
-        }
+        }*/
         /// <summary>
         /// 初期状態のセーブの処理関数
         /// </summary>
