@@ -38,6 +38,11 @@ public class GameManager : MonoBehaviour
     private bool isReStart;
     public bool isEnd;
     private bool isStart;
+    private static readonly float overWaitMaxTime = 3.0f;
+    private float overWaitTime = overWaitMaxTime;
+    private static readonly float clearWaitMaxTime = 3.0f;
+    private float clearWaitTime = clearWaitMaxTime;
+
     private void Start()
     {
         isEnd = false;
@@ -93,6 +98,10 @@ public class GameManager : MonoBehaviour
                 break;
             case State.EndGame:
                 Manager.BGMManager.Instance.BGMChange("OniBaraiBGM03UnHappy");
+                if (overWaitTime > 0.0f) {
+                    overWaitTime -= Time.deltaTime;
+                    break;
+                }
                 if (Input.GetButtonDown("Fire1") || Input.anyKeyDown)
                 {
                     m_TitleScreenAnimator.SetBool("isReStart", true);
@@ -105,6 +114,12 @@ public class GameManager : MonoBehaviour
                 m_ClearScreen.SetActive(true);
                 m_Player.SetActive(false);
                 m_Sponer.SetActive(false);
+
+                if (clearWaitTime > 0.0f) {
+                    clearWaitTime -= Time.deltaTime;
+                    break;
+                }
+
                 if (Input.GetButtonDown("Fire1") || Input.anyKeyDown)
                 {
                     m_TitleScreenAnimator.SetBool("isReStart", true);
